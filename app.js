@@ -29,7 +29,21 @@ app.command("/salesdeck", async ({ ack, body, context }) => {
   }
 });
 
-// listen for launch button click
+// listen for 'Never mind!' button click
+app.action("close", async ({ ack, body, context }) => {
+  await ack();
+  try {
+    await app.client.chat.delete({
+      token: context.botToken,
+      channel: body.channel.id,
+      ts: body.message.ts,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// listen for 'Let's get started!' button click
 app.action("launch", async ({ ack, body, context }) => {
   await ack();
   try {
@@ -45,6 +59,7 @@ app.action("launch", async ({ ack, body, context }) => {
 
 let accountName;
 
+// listen for modal submission
 app.view("submit", async ({ ack, body, context, view }) => {
   await ack();
   try {
