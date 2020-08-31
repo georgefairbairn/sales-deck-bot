@@ -1,2 +1,3 @@
-# midas-touch
- Midas Touch - demo app
+# sales-deck-bot
+
+Sales Deck Bot - demo app
