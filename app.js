@@ -1,4 +1,4 @@
-const { App, LogLevel } = require("@slack/bolt");
+const { App } = require("@slack/bolt");
 const dotenv = require("dotenv");
 
 // import blocks
@@ -44,10 +44,10 @@ app.action("close", async ({ ack, body, context }) => {
 });
 
 // listen for 'Let's get started!' button click
-app.action("launch", async ({ ack, body, context }) => {
+app.action("launch", async ({ ack, body, client, context }) => {
   await ack();
   try {
-    await app.client.views.open({
+    await client.views.open({
       token: context.botToken,
       trigger_id: body.trigger_id,
       view: select_account_view,
@@ -76,7 +76,9 @@ app.view("submit", async ({ ack, body, context, view }) => {
       await app.client.chat.postMessage({
         token: context.botToken,
         channel: body.user.id,
-        text: "Slides generated!",
+        as_user: true,
+        text:
+          "Here's your <https://docs.google.com/presentation/d/1wsHgS1vRzmdku72vgRVaKUdeZu7F7erNPYwX_snuPFo|slides>!",
       });
     }, 3000);
   } catch (error) {

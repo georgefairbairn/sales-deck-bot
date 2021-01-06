@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/georgefairbairn/midas-touch#readme",
   "dependencies": {
-    "@slack/bolt": "^2.3.0",
+    "@slack/bolt": "^2.6.0",
     "dotenv": "^8.2.0"
   }
 }
